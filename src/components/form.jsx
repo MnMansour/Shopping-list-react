@@ -22,15 +22,18 @@ class Form extends Component{
     render(){
 
         return(
-            <div style={this.props.display} className="add" id="add">
+            <form style={this.props.display} className="add" onSubmit={(e)=>{
+                this.addItem();
+                e.preventDefault()
+            }}>
                 <input type="text" placeholder="Item Name" 
                 value={this.state.item} onChange={(e) =>this.setState({'item':e.target.value})}/>
                 <input type="text" placeholder="Quantity" 
                 value={this.state.quantity} onChange={(e) =>this.setState({'quantity':e.target.value})}/>
                 <input type="text" placeholder="Buy it before" 
                 value={this.state.bib} onChange={(e) =>this.setState({'bib':e.target.value})}/>
-                <button onClick={()=>this.addItem()}  id="add">Add Item</button>
-            </div>      
+                <button>Add Item</button>
+            </form>      
         )
     }
 }
