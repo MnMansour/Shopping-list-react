@@ -23,21 +23,17 @@ class App extends Component{
     }
 
     _done = (id, item, quantity, toa, bib) =>{
-        let updateData1 = this.state.data1
-        
-        updateData1.unshift({id, item, quantity,toa, bib})
         this.setState({
             data: this.state.data.filter((e)=> e.id !== id),
-            data1: updateData1
+            data1: this.state.data1.concat({id, item, quantity,toa, bib})
         })
     }
 
     _undone = (id, item, quantity, toa, bib) =>{
-        let updateData = this.state.data
-        
-        updateData.unshift({id, item, quantity, toa, bib})
+        let updateData = [];
+        updateData.unshift({id, item, quantity,toa, bib})
         this.setState({
-            data: updateData,
+            data: updateData.concat(this.state.data),
             data1: this.state.data1.filter((e)=> e.id !== id)
         })
     }
@@ -45,10 +41,10 @@ class App extends Component{
     _addItem = (item, quantity, bib) => {
         const id = new Date();
         const toa = `${new Date().getMonth()+1}-${new Date().getDate()}-${new Date().getFullYear()}`
-        let updateData = this.state.data;
+        let updateData = [];
         updateData.unshift({id, item, quantity, toa, bib})
         this.setState({
-            data: updateData,
+            data: updateData.concat(this.state.data),
         })
         
     }

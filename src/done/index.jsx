@@ -18,7 +18,7 @@ class Done extends Component{
             const time = `${new Date().getHours()}:${new Date().getMinutes() > 9? new Date().getMinutes() : '0' + new Date().getMinutes()}  ${new Date().getMonth()+1}-${new Date().getDate()}-${new Date().getFullYear()}`;
             return(
             <tr key={i}>
-                <td><i  onClick={()=>this.props.undone(item.id, item.item, item.quantity, item.toa, item.bib)} class="fa fa-repeat" aria-hidden="true"></i></td>
+                <td><i  onClick={()=>this.props.undone(item.id, item.item, item.quantity, item.toa, item.bib)} className="fa fa-repeat" aria-hidden="true"></i></td>
                 <td>{item.item}</td><td>{item.quantity}</td><td>{time}</td>
                 <td><i onClick={()=>this.props.remove(item.id)} className="fa fa-trash-o" aria-hidden="true"></i></td>
             </tr>
