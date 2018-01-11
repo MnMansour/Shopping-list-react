@@ -1,14 +1,17 @@
 import React , {Component} from "react";
 import "./App.css";
 import {data} from "./data";
-import Wish from "./wish";
-import Done from "./done";
+import {th} from "./data";
+import {th1} from "./data"
+import Table from "./components";
 
 class App extends Component{
 
     state={
-        data:data,
-        data1: []
+        data,
+        data1:[],
+        th,
+        th1
     }
     
     _remove = (id) =>{
@@ -30,8 +33,7 @@ class App extends Component{
     }
 
     _undone = (id, item, quantity, toa, bib) =>{
-        let updateData = [];
-        updateData.unshift({id, item, quantity,toa, bib})
+        let updateData = [{id, item, quantity,toa, bib}];
         this.setState({
             data: updateData.concat(this.state.data),
             data1: this.state.data1.filter((e)=> e.id !== id)
@@ -46,15 +48,37 @@ class App extends Component{
         this.setState({
             data: updateData.concat(this.state.data),
         })
-        
+    }
+
+    itemsWish = (item,i)=>{
+        const time = Date.parse(item.bib)-Date.parse(new Date())
+        const timeYouHave =  time > 0?Math.floor(time/(1000*60*60*24))+" Days":"Expired";
+        return(
+        <tr key={i}>
+            <td><i onClick={()=>this._done(item.id, item.item, item.quantity, item.toa, item.bib)} className="fa fa-check-square-o" aria-hidden="true"></i></td>
+            <td>{item.item}</td><td>{item.quantity}</td><td className="z">{item.toa}</td><td className="z">{item.bib}</td><td>{timeYouHave}</td>
+            <td><i onClick={()=>this._remove(item.id)} className="fa fa-trash-o" aria-hidden="true"></i></td>
+        </tr>
+        )
+    }
+
+    itemsDone = (item,i)=>{
+        const time = `${new Date().getHours()}:${new Date().getMinutes() > 9? new Date().getMinutes() : '0' + new Date().getMinutes()}  ${new Date().getMonth()+1}-${new Date().getDate()}-${new Date().getFullYear()}`;
+        return(
+        <tr key={i}>
+            <td><i onClick={()=>this._undone(item.id, item.item, item.quantity, item.toa, item.bib)} className="fa fa-repeat" aria-hidden="true"></i></td>
+            <td>{item.item}</td><td>{item.quantity}</td><td>{time}</td>
+            <td><i onClick={()=>this._remove1(item.id)} className="fa fa-trash-o" aria-hidden="true"></i></td>
+        </tr>
+        )
     }
 
     render(){
-                return(
+        return(
             <div className="App">
                 <div className="App-title">Shopping List</div>
-                <Wish remove={this._remove} done={this._done} data={this.state.data} addItem={this._addItem} />
-                <Done remove={this._remove1} undone={this._undone} data={this.state.data1}/>
+                <Table table="Wish List" items={this.itemsWish} data={this.state.data} addItem={this._addItem} th={this.state.th}/>
+                <Table table="Done List" items={this.itemsDone} data={this.state.data1} th={this.state.th1}/>
             </div>
         )
     }
