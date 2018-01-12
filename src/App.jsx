@@ -1,15 +1,16 @@
 import React , {Component} from "react";
 import "./App.css";
-import {data} from "./data";
-import {th} from "./data";
-import {th1} from "./data"
+import data from "./server/data";
+import data1 from "./server/data1";
+import th from "./server/th";
+import th1 from "./server/th1"
 import Table from "./components";
 
 class App extends Component{
 
     state={
         data,
-        data1:[],
+        data1,
         th,
         th1
     }
