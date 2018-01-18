@@ -15,25 +15,25 @@ class App extends Component{
         th1
     }
     
-    _remove = (id) =>{
+    _remove (id) {
         this.setState({
             data: this.state.data.filter((e)=> e.id !== id)
         })
     }
-    _remove1 = (id) =>{
+    _remove1  (id) {
         this.setState({
             data1: this.state.data1.filter((e)=> e.id !== id)
         })
     }
 
-    _done = (id, item, quantity, toa, bib) =>{
+    _done  (id, item, quantity, toa, bib) {
         this.setState({
             data: this.state.data.filter((e)=> e.id !== id),
             data1: this.state.data1.concat({id, item, quantity,toa, bib})
         })
     }
 
-    _undone = (id, item, quantity, toa, bib) =>{
+    _undone  (id, item, quantity, toa, bib) {
         let updateData = [{id, item, quantity,toa, bib}];
         this.setState({
             data: updateData.concat(this.state.data),
@@ -78,8 +78,8 @@ class App extends Component{
         return(
             <div className="App">
                 <div className="App-title">Shopping List</div>
-                <Table table="Wish List" items={this.itemsWish} data={this.state.data} addItem={this._addItem} th={this.state.th}/>
-                <Table table="Done List" items={this.itemsDone} data={this.state.data1} th={this.state.th1}/>
+                <Table class="wish" table="Wish List" items={this.itemsWish} data={this.state.data} addItem={this._addItem} th={this.state.th}/>
+                <Table class="done" table="Done List" items={this.itemsDone} data={this.state.data1} th={this.state.th1}/>
             </div>
         )
     }

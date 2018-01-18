@@ -8,7 +8,8 @@ class Table extends Component{
         displayF:{display:"none"},
         displayT:{display:"table"},
         displayI:{display:""},
-        iconClass:"fa fa-chevron-circle-up"
+        iconClass:"fa fa-chevron-circle-up",
+        window: window.innerWidth
     }
 
     expand = () => {
@@ -46,7 +47,7 @@ class Table extends Component{
 
         const items = this.props.data.map(this.props.items)
         return(
-        <div className="wish">
+        <div className="section">
             <div className="sub-title"> {this.props.table} 
                 <span>
                     <i style={this.state.displayI} onClick={this.showForm} className="fa fa-plus-circle" aria-hidden="true"></i>
@@ -54,7 +55,7 @@ class Table extends Component{
                 </span>
             </div>
             <Form addItemX={this._addItemX} display={this.state.displayF}/>
-            <table style={this.state.displayT}>
+            <table className={this.props.class} style={this.state.displayT}>
                 <thead>
                     <tr>{th}</tr>
                 </thead>

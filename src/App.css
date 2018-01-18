@@ -23,7 +23,7 @@ body {
     text-transform: uppercase
 }
 
-.wish, .done{
+.section{
     width: 90%;
     margin: 20px auto;
     padding: 0px 36px;
@@ -87,15 +87,44 @@ th ,td{
     border: black 2px solid;
     padding: 6px;
     display: inline-block;
-    width: 23%;
+    width: 21%;
     margin: 6px;
     outline: none
 }
 
 .add button{
     float: right;
-    width: 135px;
+    width: 130px;
     background-color: #131240
+}
+
+@media (max-width: 768px){
+    .wish td:nth-child(4),.wish td:nth-child(5),
+    .wish th:nth-child(4),.wish th:nth-child(5) {
+        display: none
+    }
+    .section{
+        width: 98%;
+        padding:0
+    }
+    .sub-title{
+        padding: 0 12px
+    }
+    .add input, .add button{
+        display: block;
+        width: 80%;
+        margin: 12px auto;
+        float: none
+    }
+}
+
+@media(max-width : 480px){
+    .App-title{
+        font-size: 2em
+    }
+    table{
+        width: 100%;
+    }
 }
 
 html::-webkit-scrollbar
